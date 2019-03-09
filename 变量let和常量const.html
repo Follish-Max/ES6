@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<input type="button" value="按钮1">
+<input type="button" value="按钮2">
+<input type="button" value="按钮3">
+
+
+<script>
+    // 1.这个是错误的，最后弹出的都是3
+    // var aBtn = document.getElementsByTagName('input')
+    // for(var i = 0;i < aBtn.length;i ++) {
+    //     aBtn[i].onclick = function () {
+    //         alert(i)
+    //     }
+    // }
+
+    //2.使用闭包解决
+    // var aBtn = document.getElementsByTagName('input')
+    // for(var i = 0;i < aBtn.length;i ++) {
+    //     (function (i) {
+    //         aBtn[i].onclick = function () {
+    //             alert(i)
+    //         }
+    //     }(i))
+    // }
+
+    //3.使用let
+    var aBtn = document.getElementsByTagName('input')
+    for(let i = 0;i < aBtn.length;i ++) {
+        aBtn[i].onclick = function () {
+            alert(i)
+        }
+    }
+</script>
+
+
+
+
+<script>
+
+    /*
+var 之前存在的问题:
+    可以重复声明，没有报错和警告
+    没法限制修改
+    没有块级作用域
+let和const
+    不能重复声明
+    都是块级作用域，{}块内声明的，块外面无效
+    let是变量，可以修改
+    const是常量，不能修改
+
+ */
+</script>
+</body>
+</html>

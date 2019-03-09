@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数</title>
+</head>
+<body>
+<script>
+    // 箭头函数就是函数的缩写
+    // 如果只有一个参数，（）可以省略
+    // 如果只有一个return，{}和return可以省略
+
+
+    //普通函数
+    function name() {
+
+    }
+    //箭头函数，去掉function，加上=>
+    () => {
+
+    }
+    let show1 = function () {
+        console.log("111")
+    }
+    let show2 = () => {
+        console.log("222")
+    }
+    show1()
+    show2()
+
+
+    let show3 = function (a) {
+        return a * 2
+    }
+    let show4 = a => a * 2
+
+    console.log(show3(2))
+    console.log(show4(2))
+</script>
+</body>
+</html>
