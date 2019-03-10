@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+异步和同步：
+    异步：操作之间没有关系，同时执行多个操作
+    同步：同时只能做一件事情
+Promise对象：
+    用同步的方式来书写代码
+    Promise让代码操作起来，就像再写同步操作的流程一样，不必一层层的嵌套回调函数
+    改善了可读性，对于多层嵌套的回调函数很方便
+    充当异步操作与回调函数之间的中介，使得异步操作具备同步操作的接口
+Promise是一个构造函数
+    接受一个回调函数作为参数，里面是异步操作的代码
+    返回一个Promise实例
+    Promise实例有一个then方法，用来指定下一步的回调函数
+ */
+
+
+    //=================================================
+    // ajax异步操作(性能高，用户体验好)
+    /*
+        ajax('/banners',function () {
+            ajax('/hotItems',function () {
+                ajax('/slides',function () {
+                    ajax("......")
+                },function (err) {
+                    alert('读取失败')
+                })
+            },function (err) {
+                alert('读取失败')
+            })
+        },function (err) {
+            alert('读取失败')
+        })
+
+
+    //同步（性能不好）
+        let banner_data = ajax_sync('/banners')
+        let hotItems_data = ajax_sync('/hotItems')
+        let slides_data = ajax_sync('/slides')
+    */
+    //Promise--消除异步操作
+    let p1 = new Promise(function (resolve,reject) {
+        //resole 成功了
+        //reject 失败了
+        $.ajax({
+            url: 'data/arr.txt',
+            dataType: 'json',
+            success(arr){
+                resolve(arr)
+            },
+            error(err) {
+                // alert("error")
+                reject(err)
+            }
+        })
+
+    });
+    let p2 = new Promise(function (resolve,reject) {
+        //resole 成功了
+        //reject 失败了
+        $.ajax({
+            url: 'data/json.txt',
+            dataType: 'json',
+            success(arr){
+                resolve(arr)
+            },
+            error(err) {
+                // alert("error")
+                reject(err)
+            }
+        })
+
+    });
+
+    // p.then(function (arr) {
+    //     alert("success"+arr)
+    // },function (err) {
+    //     alert("error"+err)
+    // })
+
+    Promise.all([
+        p1,p2
+    ]).then(function (arr) {
+        alert('all success')
+
+        let [res1,res2] = arr
+        console.log(res1)
+        console.log(res2)
+        //console.log(arr)
+    }),function () {
+        alert('only have one error')
+    };
+
+    //=================================================
+</script>
+</body>
+</html>
